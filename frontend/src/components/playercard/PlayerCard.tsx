@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Modal from '@mui/material/Modal';
 import { IPlayerCardProps } from './types/PlayerCard';
-import Box from '@mui/material/Box';
 import { getPlayerRankStats, getPlayerBasicStats, getPlayerInfo, getShootingLog, getCapHit } from '../../utils/APIUtils';
 import { RankStats, BasicStats, PlayerInfo, ShootingEvent} from '../../utils/types/Types';
 import Card from '@mui/material/Card';
-import { CardContent, Typography } from '@mui/material';
+import { CardContent } from '@mui/material';
 import './PlayerCard.scss';
 import ShotVisualizer from '../shotvisualizer/ShotVisualizer';
 import RankBox from '../rankbox/RankBox';
@@ -16,11 +14,19 @@ const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-pri
 
 const PlayerCard = (props: IPlayerCardProps) => { 
 
-  const [rankStats, setRankStats] = useState<RankStats>();
-  const [basicStats, setBasicStats] = useState<BasicStats>();
-  const [playerInfo, setPlayerInfo] = useState<PlayerInfo>();
-  const [capHit, setCapHit] = useState<string>();
-  const [shootingEvents, setShootingEvents] = useState<ShootingEvent[]>();
+  const [rankStats, setRankStats] = useState<RankStats | null>(null);
+  const [basicStats, setBasicStats] = useState<BasicStats | null>(null);
+  const [playerInfo, setPlayerInfo] = useState<PlayerInfo | null >(null);
+  const [capHit, setCapHit] = useState<string | null>(null);
+  const [shootingEvents, setShootingEvents] = useState<ShootingEvent[]| null>(null);
+
+  const resetStates = () => {
+    setRankStats(null);
+    setBasicStats(null);
+    setPlayerInfo(null);
+    setCapHit(null);
+    setShootingEvents(null);
+  }
   
   const getRankStatsData = async () => {
       if (props.player){
@@ -69,6 +75,7 @@ const PlayerCard = (props: IPlayerCardProps) => {
 
 
   useEffect( () => {
+      resetStates();
       getRankStatsData();
       getBasicStatsData();
       getPlayerInfoData();
@@ -107,7 +114,7 @@ const PlayerCard = (props: IPlayerCardProps) => {
               <BasicStat title="G" value={basicStats.goals}/>
               <BasicStat title="A" value={basicStats.assists}/>
               <BasicStat title="P" value={basicStats.points}/>
-              <BasicStat title="TOI" value={basicStats.timeOnIcePerGame}/>
+              <BasicStat title="Hits" value={basicStats.hits}/>
               </>
             ) : (
               <>
@@ -126,7 +133,7 @@ const PlayerCard = (props: IPlayerCardProps) => {
 
         </div>
 
-        {!!rankStats && (
+        {!!rankStats ? (
           <>
           <h4>League Performance Rankings</h4>
           <div className='rank-stats'>
@@ -154,9 +161,14 @@ const PlayerCard = (props: IPlayerCardProps) => {
             </div>
           </div>
         </>
+        ): (
+        <div className='loading-wrapper'>
+          <div className='loader'></div>
+          <p>loading ranked data...</p>
+        </div>
         )}
 
-        {!!shootingEvents && playerInfo.primaryPosition.code != "G" && (
+        {!!shootingEvents && playerInfo.primaryPosition.code != "G" ? (
           <>
           <h4>Shooting Log</h4>
           <div className='shot-log-wrapper'>
@@ -169,6 +181,11 @@ const PlayerCard = (props: IPlayerCardProps) => {
             </div>
           </div>
           </>
+        ) : (
+          <div className='loading-wrapper'>
+            <div className='loader'></div>
+            <p>loading shooting data...</p>
+          </div>
         )}
       </CardContent>
     </Card>

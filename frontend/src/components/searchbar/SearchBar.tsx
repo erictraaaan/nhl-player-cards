@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete , {createFilterOptions} from '@mui/material/Autocomplete';
 import React, { useEffect, useState } from 'react';
 import { getPlayers }from '../../utils/APIUtils';
 import { BasePlayer} from '../../utils/types/Types';
@@ -17,13 +17,14 @@ const SearchBar = (props: ISearchBarProps) => {
     await getPlayers()
     .then( (res) => {
       setPlayers(res);
+      getTotalPlayers(res);
     })
   }
 
-  const getTotalPlayers = () => { 
+  const getTotalPlayers = (rawPlayers: BasePlayer[]) => { 
     var skaters = 0;
     var goalies = 0;
-    players.forEach( (player) => {
+    rawPlayers.forEach( (player) => {
       if (player.position == "G") {
         goalies++;
       }
@@ -34,15 +35,19 @@ const SearchBar = (props: ISearchBarProps) => {
     props.onTotalPlayers(skaters, goalies);
   }
 
+  const filterOptions = createFilterOptions({
+    limit:10
+  });
+
   useEffect( () => {
     getPlayerData();
-    getTotalPlayers();
   }, [])
   
     return (
       <>
       {players.length > 0 ? (
         <Autocomplete
+        filterOptions={filterOptions}
         className="search-bar"
         id="team-select"
         sx={{ width: 300 }}
@@ -65,12 +70,12 @@ const SearchBar = (props: ISearchBarProps) => {
             setOpen(false);
           }
         }}
-        onChange={(event: any, value: BasePlayer | null) => {
+        onChange={(event: any, value: any) => {
           props.onSelectedPlayer(value);
           setOpen(false)
         }}
-        getOptionLabel={(option) => (`${option.name} (${option.teamcode})`)}
-        renderOption={(props, option) => (
+        getOptionLabel={(option: any) => (`${option.name} (${option.teamcode})`)}
+        renderOption={(props, option: any) => (
           <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
           <img
                loading="lazy"
@@ -87,13 +92,18 @@ const SearchBar = (props: ISearchBarProps) => {
             {...params}
             label="Choose a player"
             inputProps={{
-              ...params.inputProps,
+              ...params.inputProps, endAdornment : null,
               autoComplete: 'new-password', // disable autocomplete and autofill
             }}
           />
         )}
       />
-      ) : (<p>loading...</p>)}
+      ) : (
+      <div className='loading-wrapper'>
+        <div className='loader'></div>
+        <p>loading data...</p>
+      </div>
+      )}
     </>
     );
 }

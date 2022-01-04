@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 import numpy as np
 import json
+from datetime import datetime
 from flask import abort
 
 nhl_url = 'https://statsapi.web.nhl.com/api/v1/'
@@ -51,34 +52,43 @@ def get_game_plays(game_pk, params={}):
     return response['liveData']
 
 def get_players():
-    data = get_teams()
-    teams=[]
-    team_codes = []
-    for team in data:
-        teams.append(team['id'])
-        team_codes.append(team['abbreviation'])
+    dateTimeObj = datetime.now()
+    currentTimeStamp = dateTimeObj.strftime("%Y-%m-%d")
+    try:
+        df = pd.read_csv('./player_data/players_' + currentTimeStamp + '.csv')
+        result = df.to_json(orient='records')
+        parsed = json.loads(result)
+        return parsed
+    except:
+        data = get_teams()
+        teams=[]
+        team_codes = []
+        for team in data:
+            teams.append(team['id'])
+            team_codes.append(team['abbreviation'])
 
-    player_list = []
-    for i in range(len(teams)):
-        team = teams[i]
-        team_code = team_codes[i]
-        player_data = get_team(team,"expand=team.roster")
-        
-        for player in player_data["roster"]["roster"]:
-            fullName = player['person']['fullName']
-            player_id = player['person']['id']
-            pos = player['position']['code']
-            array = [fullName, player_id, team_code, team, pos]
-            player_list.append(array)
+        player_list = []
+        for i in range(len(teams)):
+            team = teams[i]
+            team_code = team_codes[i]
+            player_data = get_team(team,"expand=team.roster")
+            
+            for player in player_data["roster"]["roster"]:
+                fullName = player['person']['fullName']
+                player_id = player['person']['id']
+                pos = player['position']['code']
+                array = [fullName, player_id, team_code, team, pos]
+                player_list.append(array)
 
-    numpy_data = np.array(player_list)
-    df_ids = pd.DataFrame(data=numpy_data, columns=["name", "id","teamcode", "teamid", "position"])
-    df_ids[['first_name','last_name']] = df_ids['name'].loc[df_ids['name'].str.split().str.len() == 2].str.split(expand=True)
-    df_ids = df_ids.sort_values(by='last_name').reset_index()
-    df_ids = df_ids[['name','id','teamcode','teamid', "position"]]
-    result = df_ids.to_json(orient='records')
-    parsed = json.loads(result)
-    return parsed
+        numpy_data = np.array(player_list)
+        df_ids = pd.DataFrame(data=numpy_data, columns=["name", "id","teamcode", "teamid", "position"])
+        df_ids[['first_name','last_name']] = df_ids['name'].loc[df_ids['name'].str.split().str.len() == 2].str.split(expand=True)
+        df_ids = df_ids.sort_values(by='last_name').reset_index()
+        df_ids = df_ids[['name','id','teamcode','teamid', "position"]]
+        df_ids.to_csv('./player_data/players_' + currentTimeStamp + '.csv', index=False)
+        result = df_ids.to_json(orient='records')
+        parsed = json.loads(result)
+        return parsed
 
 def get_shot_log(player_id):
     gamelog_res = get_player_stats(player_id, "stats=gameLog")

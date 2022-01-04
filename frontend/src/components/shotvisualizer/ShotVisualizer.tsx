@@ -9,8 +9,9 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
     const RINK_HALF_HEIGHT = 85;
 
     useEffect( () => {
+        d3.select('svg').remove();
         props.events != null && drawHalfRink();
-    }, []);
+    }, [props.events]);
 
     const drawHalfRink = () => {
         let svg = d3.select(ref.current)
