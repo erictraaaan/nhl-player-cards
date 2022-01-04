@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import PlayerCard from './components/playercard/PlayerCard';
+import SearchBar from './components/searchbar/SearchBar'
+import { BasePlayer } from './utils/types/Types';
 
 function App() {
+  const [selectedBasePlayer, setSelectedBasePlayer] = useState<BasePlayer | null>(null);
+
+  const handleSelectedBasePlayerChange = (player: BasePlayer| null) => {
+    setSelectedBasePlayer(player)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar onSelectedPlayer={handleSelectedBasePlayerChange}/>
+      {!!selectedBasePlayer && (
+        <PlayerCard player={selectedBasePlayer}/>
+      )}
     </div>
   );
 }

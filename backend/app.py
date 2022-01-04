@@ -1,9 +1,15 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from nhlapi import *
+from capfriendly import *
 
 app = Flask(__name__)
 CORS(app) # This will enable CORS for all routes
+
+@app.route("/players")
+def players():
+    res = get_players()
+    return jsonify(res)
 
 @app.route("/players/<player_id>")
 def player(player_id):
@@ -36,6 +42,11 @@ def team(team_id):
     res = get_team(team_id, params=request.args)
     return jsonify(res)
 
+@app.route("/depth/<team_id>")
+def team_depth(team_id):
+    res = get_depth(team_id)
+    return jsonify(res)
+
 @app.route("/teams/<team_id>/stats")
 def teamstats(team_id):
     '''Returns NHL team stats
@@ -59,4 +70,15 @@ def game(game_pk):
     '''Returns game information 
     See https://gitlab.com/dword4/nhlapi/-/blob/master/stats-api.md#games for more info'''
     res = get_game(game_pk, params=request.args)
+    return jsonify(res)
+
+@app.route("/shotlog/<player_id>")
+def shot_log(player_id):
+    res = get_shot_log(player_id)
+    return jsonify(res)
+
+@app.route("/caphit/<player_id>")
+def cap_hit(player_id):
+    res = get_cap_hit(player_id)
+    print(res)
     return jsonify(res)
