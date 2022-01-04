@@ -1,84 +1,89 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { IShotVisualizerProps } from './types/ShotVisualizer';
+import './ShotVisualizer.scss';
 
 const ShotVisualizer = (props: IShotVisualizerProps) => {
     const ref = useRef<HTMLDivElement>(null);
-    const RINK_WIDTH = 400
-	const RINK_HEIGHT = 168
+    const RINK_HALF_WIDTH = 100;
+    const RINK_HALF_HEIGHT = 85;
 
     useEffect( () => {
-        props.events != null && drawRink();
+        props.events != null && drawHalfRink();
     }, []);
 
-    const drawRink = () => {
-		//define the initial SVG element
+    const drawHalfRink = () => {
         let svg = d3.select(ref.current)
-            .append("div")
-            .classed("svg-container", true) 
-            .append('svg')
-            .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", `0 0 ${RINK_WIDTH + 10} ${RINK_HEIGHT + 10}`)
-            .classed("svg-content-responsive", true);
-
+        .append("div")
+        .classed("svg-container", true) 
+        .append('svg')
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", `0 0 ${RINK_HALF_WIDTH + 10} ${RINK_HALF_HEIGHT + 10}`)
+        .classed("svg-content-responsive", true);
 
         //draw the centre ice line
-		drawVerticalLine(svg, 198,0,RINK_HEIGHT,'red');
+		drawVerticalLine(svg, 0,0,RINK_HALF_HEIGHT,'red');
 
-		//draw centre ice circle
-		drawCircle(svg,200,84,30,'red');
+        //draw centre ice circle
+		drawCircle(svg,0,42.5,15,'red');
 
-        //draw the goals
-		drawRectangle(svg,22.6,80,8,12,'blue');
-		drawRectangle(svg,371,80,8,12,'blue');
+        //draw the goal
+        drawRectangle(svg,86,39.5,4,6,'blue');
 
-        //draw the goal lines
-		drawVerticalLine(svg,22,6,RINK_HEIGHT-12,'red');
-		drawVerticalLine(svg,378,6,RINK_HEIGHT-12,'red');
+        //draw goal line
+		drawVerticalLine(svg,90,1,RINK_HALF_HEIGHT-2,'red');
 
-		//draw the blue lines
-		drawVerticalLine(svg,144,0,RINK_HEIGHT,'blue');
-		drawVerticalLine(svg,252,0,RINK_HEIGHT,'blue');
+		//draw the blue line
+		drawVerticalLine(svg,30,0,RINK_HALF_HEIGHT,'blue');
 
-        //draw the rink outline
-		drawBaseRink(svg, RINK_HEIGHT, RINK_WIDTH);
+        // draw the faceoff circles
+        drawCircle(svg, 68,20.5,15,'red')
+        drawCircle(svg, 68,64.5,15,'red')
 
-        //plot all goals as points
-        plotGoals(svg);
+        // draw the faceoff dots
+        drawCircle(svg, 68,20.5,1,'red','red')
+        drawCircle(svg, 68,64.5,1,'red','red')
 
-		//create a heatmap for the shots
-        plotShotHeatMap(svg);
+        // draw the rink outline
+        var rect = svg.append("path")
+            .attr("d", rightRoundedRect(0, 0, 100, 85, 15))
+            .style("stroke-width", 0.5)
+            .attr('stroke', "red")
+            .attr('fill', 'transparent');
 
+        // plot the goals
+        plotHalfGoals(svg);
+
+        //plot the shot heatmap
+        plotHalfShotHeatMap(svg);
     }
 
-    const plotGoals = (svg:d3.Selection<SVGSVGElement, unknown, null, undefined>) => {
+    const plotHalfGoals = (svg:d3.Selection<SVGSVGElement, unknown, null, undefined>) => {
         props.events.forEach( (event) => {
             if (event.event == "GOAL"){
-                var plotX = 2*event.x + 200;
-                var plotY = 2*event.y + 84;
-                drawCircle(svg,plotX,plotY,2,'red', 'red');
+                var plotX = event.x;
+                var plotY = 42.5 - event.y;
+                drawCircle(svg,plotX,plotY,1,'green', 'green');
             }
         })
     }
 
-    const plotShotHeatMap = (svg:d3.Selection<SVGSVGElement, unknown, null, undefined>) => {
-        var heatArrayHome = generateHeatArray(25, 50, 0, 21);
-
+    const plotHalfShotHeatMap = (svg:d3.Selection<SVGSVGElement, unknown, null, undefined>) => {
+        var heatArray = generateHeatArray(0, 50, 0, 42);
         props.events.forEach( (event) => {
             if (event.event == "SHOT"){
-                var plotX = 2*event.x + 200;
-                var plotY = 2*event.y + 84;
+                var plotX = event.x;
+                var plotY = 42.5 - event.y;
                 addToHeatArray(
-					heatArrayHome,{x: plotX, y: plotY});
+					heatArray,{x: plotX, y: plotY});
             }
         })
 
-        let colorScaleHome = generateColourScale('blue');
+        let colorScale = generateColourScale('green');
 
-        drawHeatMap(svg, heatArrayHome,colorScaleHome);
-
+        drawHeatMap(svg, heatArray,colorScale);
     }
-    
+
     const drawHeatMap = (svg:any, heatArray: number[][], colourScale: any) => {
 		svg.selectAll('rect')
             .data(heatArray)
@@ -91,7 +96,7 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
             .attr('width', 8)
             .attr('height', 8)
             .attr('fill', (d: any) => colourScale(d[2]))
-            .attr('opacity', .8)
+            .attr('opacity', .6)
 	}
 
     const generateColourScale = (colour: string) => {
@@ -126,9 +131,22 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
 			.attr('x', x)
 			.attr('y', y)
 			.attr('height', length)
-			.attr('width', '2')
+			.attr('width', '0.5')
 			.style('fill', colour)
     }
+
+    // path for a rectangle that is rounded on two ends. perfect for a half-rink!
+    // Taken from StackOverflow : https://stackoverflow.com/questions/12115691/svg-d3-js-rounded-corner-on-one-corner-of-a-rectangle
+    const rightRoundedRect = (x: number, y: number,
+        width: number, height: number, radius: number) => {
+        return "M" + x + "," + y
+             + "h" + (width - radius)
+             + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius
+             + "v" + (height - 2 * radius)
+             + "a" + radius + "," + radius + " 0 0 1 " + -radius + "," + radius
+             + "h" + (radius - width)
+             + "z";
+      }
 
     const drawCircle =  (svg:d3.Selection<SVGSVGElement, unknown, null, undefined>,
         x: number, y: number, radius: number, colour: string, fill?: string) => {
@@ -166,8 +184,7 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
             .style("fill", "none")
             .style("stroke-width", 'black');
     }
-
-
+    
     return (<div className="shot-visualizer-div" ref={ref}/>);
 }
 

@@ -9,6 +9,7 @@ import { CardContent, Typography } from '@mui/material';
 import './PlayerCard.scss';
 import ShotVisualizer from '../shotvisualizer/ShotVisualizer';
 import RankBox from '../rankbox/RankBox';
+import BasicStat from '../basicstat/BasicStat';
 
 const PORTRAITS_URL = "https://nhl.bamcontent.com/images/headshots/current/168x168/";
 const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/";
@@ -111,14 +112,28 @@ const PlayerCard = (props: IPlayerCardProps) => {
             <p className='weight'>Weight: {playerInfo.weight}lbs</p>
             <p className='caphit'>Cap Hit: {capHit}</p>
           </div>
-          <div className='reg-stats'>
-            <h4>Current Season Performance:</h4>
+          {!!basicStats && (
+            <>
+          <div className="basic-stat-wrapper">
+          <h4>Current Season Performance:</h4>
+
+          <div className='basic-stats'>
+
+            <BasicStat title="G" value={basicStats.goals}/>
+            <BasicStat title="A" value={basicStats.assists}/>
+            <BasicStat title="P" value={basicStats.points}/>
+            <BasicStat title="TOI" value={basicStats.timeOnIcePerGame}/>
           </div>
+          </div>
+          </>
+          )}
+
+
         </div>
 
         {!!rankStats && (
           <>
-          <h4>League Performance</h4>
+          <h4>League Performance Rankings</h4>
           <div className='rank-stats'>
             <div className='stats'>
               <RankBox title="Goal Scoring" rank={rankStats.rankGoals} />
@@ -133,7 +148,11 @@ const PlayerCard = (props: IPlayerCardProps) => {
         )}
 
         {!!shootingEvents && (
+          <>
+          <h4>Shooting Log</h4>
           <ShotVisualizer events={shootingEvents}/>
+          <p>Distribution of shots taken by this player over the past 20 games.</p>
+          </>
         )}
       </CardContent>
     </Card>

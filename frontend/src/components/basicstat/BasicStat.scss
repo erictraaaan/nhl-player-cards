@@ -1,0 +1,17 @@
+.basic-stat-wrapper{
+
+    .basic-stats {
+        display: flex;
+        align-items: center;
+        
+        .stat {
+            margin: 0.5rem;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            background: yellowgreen;
+            line-height: 2.5rem;
+        }
+    }
+}
+

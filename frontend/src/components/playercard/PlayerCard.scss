@@ -55,8 +55,7 @@
 
         .rank{
             &-stats{
-                width: 5rem;
-                height: 5rem;
+                margin-bottom: 1rem;
 
                 .stats{
                     display: flex;
@@ -79,17 +78,6 @@
                 background: aquamarine;
             }
         }
-
-        // .rank-stats{
-        //     .rank-wrapper{
-        //         width: 5rem;
-        //         height: 5rem;
-
-        //         .rank-box{
-
-        //         }
-        //     }
-        // }
 
     }
 
