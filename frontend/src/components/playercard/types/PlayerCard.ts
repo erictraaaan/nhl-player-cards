@@ -1,6 +1,7 @@
 import { BasePlayer, Player } from "../../../utils/types/Types";
 
 export interface IPlayerCardProps {
-    player: BasePlayer
-    // onClearPlayer: () => void;
+    player: BasePlayer,
+    totalPlayers: number,
+    totalGoalies: number
 }

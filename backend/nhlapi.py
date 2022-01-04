@@ -67,14 +67,15 @@ def get_players():
         for player in player_data["roster"]["roster"]:
             fullName = player['person']['fullName']
             player_id = player['person']['id']
-            array = [fullName, player_id, team_code, team]
+            pos = player['position']['code']
+            array = [fullName, player_id, team_code, team, pos]
             player_list.append(array)
 
     numpy_data = np.array(player_list)
-    df_ids = pd.DataFrame(data=numpy_data, columns=["name", "id","teamcode", "teamid"])
+    df_ids = pd.DataFrame(data=numpy_data, columns=["name", "id","teamcode", "teamid", "position"])
     df_ids[['first_name','last_name']] = df_ids['name'].loc[df_ids['name'].str.split().str.len() == 2].str.split(expand=True)
     df_ids = df_ids.sort_values(by='last_name').reset_index()
-    df_ids = df_ids[['name','id','teamcode','teamid']]
+    df_ids = df_ids[['name','id','teamcode','teamid', "position"]]
     result = df_ids.to_json(orient='records')
     parsed = json.loads(result)
     return parsed

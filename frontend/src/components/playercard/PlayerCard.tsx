@@ -133,22 +133,21 @@ const PlayerCard = (props: IPlayerCardProps) => {
             <div className='stats'>
               {playerInfo.primaryPosition.code != "G" ? (
                 <>
-                <RankBox title="Goal Scoring" rank={rankStats.rankGoals} />
-                <RankBox title="Assists" rank={rankStats.rankAssists} />
-                <RankBox title="Points" rank={rankStats.rankPoints} />
-                <RankBox title="Shots" rank={rankStats.rankShots} />
-                <RankBox title="Hits" rank={rankStats.rankHits} />
-                <RankBox title="Blocked Shots" rank={rankStats.rankBlockedShots} />
+                <RankBox title="Goal Scoring" rank={rankStats.rankGoals} totalPlayers={props.totalPlayers}/>
+                <RankBox title="Assists" rank={rankStats.rankAssists} totalPlayers={props.totalPlayers}/>
+                <RankBox title="Points" rank={rankStats.rankPoints} totalPlayers={props.totalPlayers}/>
+                <RankBox title="Shots" rank={rankStats.rankShots} totalPlayers={props.totalPlayers}/>
+                <RankBox title="Hits" rank={rankStats.rankHits} totalPlayers={props.totalPlayers}/>
+                <RankBox title="Blocked Shots" rank={rankStats.rankBlockedShots} totalPlayers={props.totalPlayers}/>
                 </>
               ): (
                 <>
-                <RankBox title="Wins" rank={rankStats.wins} />
-                <RankBox title="GAA" rank={rankStats.goalsAgainstAverage} />
-                <RankBox title="SV%" rank={rankStats.savePercentage} />
-                <RankBox title="Shutouts" rank={rankStats.shutOuts} />
-                <RankBox title="Saves" rank={rankStats.saves} />
-                <RankBox title="Games Played" rank={rankStats.games} />
-
+                <RankBox title="Wins" rank={rankStats.wins} totalPlayers={props.totalGoalies}/>
+                <RankBox title="GAA" rank={rankStats.goalsAgainstAverage} totalPlayers={props.totalGoalies}/>
+                <RankBox title="SV%" rank={rankStats.savePercentage} totalPlayers={props.totalGoalies}/>
+                <RankBox title="Shutouts" rank={rankStats.shutOuts} totalPlayers={props.totalGoalies}/>
+                <RankBox title="Saves" rank={rankStats.saves} totalPlayers={props.totalGoalies}/>
+                <RankBox title="Games Played" rank={rankStats.games} totalPlayers={props.totalGoalies}/>
                 </>
               )}
 

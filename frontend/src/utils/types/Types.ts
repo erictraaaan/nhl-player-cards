@@ -9,6 +9,7 @@ export interface BasePlayer {
     name: string
     teamcode: string
     teamid: number
+    position: string
 }
 
 export interface ShootingEvent {

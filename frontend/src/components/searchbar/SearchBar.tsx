@@ -20,8 +20,23 @@ const SearchBar = (props: ISearchBarProps) => {
     })
   }
 
+  const getTotalPlayers = () => { 
+    var skaters = 0;
+    var goalies = 0;
+    players.forEach( (player) => {
+      if (player.position == "G") {
+        goalies++;
+      }
+      else {
+        skaters++;
+      }
+    })
+    props.onTotalPlayers(skaters, goalies);
+  }
+
   useEffect( () => {
     getPlayerData();
+    getTotalPlayers();
   }, [])
   
     return (
