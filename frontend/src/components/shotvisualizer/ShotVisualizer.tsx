@@ -170,20 +170,6 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
             .style("stroke-width", 0.5)
             .attr('fill', '#89CFF0');
     }
-
-    const drawBaseRink = (svg:d3.Selection<SVGSVGElement, unknown, null, undefined>, height: number, width: number) => {
-        svg.append("rect")
-            .attr('rx', 45)
-            .attr('ry', 45)
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("height", height)
-            .attr("width", width)
-            .style('opacity', 1)
-            .style("stroke", 'black')
-            .style("fill", "none")
-            .style("stroke-width", 'black');
-    }
     
     return (<div className="shot-visualizer-div" ref={ref}/>);
 }

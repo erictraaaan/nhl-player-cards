@@ -14,18 +14,6 @@ import BasicStat from '../basicstat/BasicStat';
 const PORTRAITS_URL = "https://nhl.bamcontent.com/images/headshots/current/168x168/";
 const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/";
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-
 const PlayerCard = (props: IPlayerCardProps) => { 
 
   const [rankStats, setRankStats] = useState<RankStats>();
@@ -38,7 +26,6 @@ const PlayerCard = (props: IPlayerCardProps) => {
       if (props.player){
         await getPlayerRankStats(props.player.id)
         .then( (res) => {
-          console.log("rank stats: ", res);
           setRankStats(res);
         })
       }
@@ -48,7 +35,6 @@ const PlayerCard = (props: IPlayerCardProps) => {
     if (props.player){
       await getPlayerBasicStats(props.player.id)
       .then( (res) => {
-        console.log("basic stats: " , res);
         setBasicStats(res);
       })
     }
@@ -58,7 +44,6 @@ const PlayerCard = (props: IPlayerCardProps) => {
     if (props.player){
       await getPlayerInfo(props.player.id)
       .then( (res) => {
-        console.log("player info: ", res);
         setPlayerInfo(res);
       })
     }
@@ -69,7 +54,6 @@ const PlayerCard = (props: IPlayerCardProps) => {
       await getShootingLog(props.player.id)
       .then( (res) => {
         setShootingEvents(res);
-        console.log("shooting events: " , res);
       })
     }
   }

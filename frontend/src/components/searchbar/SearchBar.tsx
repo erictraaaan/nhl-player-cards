@@ -2,39 +2,16 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import React, { useEffect, useState } from 'react';
-import { getPlayers, getTeams }from '../../utils/APIUtils';
-import { Team , BasePlayer} from '../../utils/types/Types';
+import { getPlayers }from '../../utils/APIUtils';
+import { BasePlayer} from '../../utils/types/Types';
 import { ISearchBarProps } from './types/SearchBar';
-import { makeStyles } from '@mui/material';
-
+import './SearchBar.scss'
 
 const SearchBar = (props: ISearchBarProps) => {
   const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/";
-
-  // const [teams, setTeams] = useState<Team[]>([]);
-
   const [players, setPlayers] = useState<BasePlayer[]>([]);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
-  // const getTeamData = async () => {
-  //   await getTeams()
-  //   .then( (res) => {
-  //     res.sort( (a,b) => {
-  //         var aText = a.name;
-  //         var bText = b.name;
-  //         return (aText < bText) ? -1 : (aText > bText) ? 1 : 0;
-  //     });
-  //     setTeams(res);
-  //   })
-  // }
-
-  // const AutocompleteStyles = makeStyles( (theme: any) => ({
-  //   endAdornment: {
-  //       display: 'none'
-  //   }
-  // }))
-  // const autocompleteStyles = AutocompleteStyles();
 
   const getPlayerData = async () => {
     await getPlayers()
@@ -44,7 +21,6 @@ const SearchBar = (props: ISearchBarProps) => {
   }
 
   useEffect( () => {
-    // getTeamData();
     getPlayerData();
   }, [])
   
@@ -52,6 +28,7 @@ const SearchBar = (props: ISearchBarProps) => {
       <>
       {players.length > 0 ? (
         <Autocomplete
+        className="search-bar"
         id="team-select"
         sx={{ width: 300 }}
         options={players}

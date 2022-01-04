@@ -13,6 +13,12 @@ function App() {
 
   return (
     <div className="App">
+      {!!!selectedBasePlayer && (
+        <>
+        <h2>NHL Player Cards</h2>
+        <p>View stats about any player currently playing in the NHL.</p>
+        </>
+      )}
       <SearchBar onSelectedPlayer={handleSelectedBasePlayerChange}/>
       {!!selectedBasePlayer && (
         <PlayerCard player={selectedBasePlayer}/>
