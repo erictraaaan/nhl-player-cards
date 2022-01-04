@@ -27,6 +27,12 @@ export interface BasicStats {
     hits: number,
     points: number,
     timeOnIcePerGame: string
+    gamesStarted: number,
+    goalAgainstAverage: number,
+    savePercentage: number,
+    shutouts: number,
+    wins: number
+
 }
 
 export interface PlayerInfo {

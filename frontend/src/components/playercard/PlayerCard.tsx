@@ -102,11 +102,22 @@ const PlayerCard = (props: IPlayerCardProps) => {
           <h4>Current Season Performance:</h4>
 
           <div className='basic-stats'>
+            {playerInfo.primaryPosition.code != "G" ? (
+              <>
+              <BasicStat title="G" value={basicStats.goals}/>
+              <BasicStat title="A" value={basicStats.assists}/>
+              <BasicStat title="P" value={basicStats.points}/>
+              <BasicStat title="TOI" value={basicStats.timeOnIcePerGame}/>
+              </>
+            ) : (
+              <>
+              <BasicStat title="Wins" value={basicStats.wins}/>
+              <BasicStat title="SV%" value={basicStats.savePercentage}/>
+              <BasicStat title="GAA" value={basicStats.goalAgainstAverage}/>
+              <BasicStat title="SO" value={basicStats.shutouts}/>
+              </>
+            )}
 
-            <BasicStat title="G" value={basicStats.goals}/>
-            <BasicStat title="A" value={basicStats.assists}/>
-            <BasicStat title="P" value={basicStats.points}/>
-            <BasicStat title="TOI" value={basicStats.timeOnIcePerGame}/>
           </div>
           </div>
           </>
@@ -120,18 +131,33 @@ const PlayerCard = (props: IPlayerCardProps) => {
           <h4>League Performance Rankings</h4>
           <div className='rank-stats'>
             <div className='stats'>
-              <RankBox title="Goal Scoring" rank={rankStats.rankGoals} />
-              <RankBox title="Assists" rank={rankStats.rankAssists} />
-              <RankBox title="Points" rank={rankStats.rankPoints} />
-              <RankBox title="Shots" rank={rankStats.rankShots} />
-              <RankBox title="Hits" rank={rankStats.rankHits} />
-              <RankBox title="Blocked Shots" rank={rankStats.rankBlockedShots} />
+              {playerInfo.primaryPosition.code != "G" ? (
+                <>
+                <RankBox title="Goal Scoring" rank={rankStats.rankGoals} />
+                <RankBox title="Assists" rank={rankStats.rankAssists} />
+                <RankBox title="Points" rank={rankStats.rankPoints} />
+                <RankBox title="Shots" rank={rankStats.rankShots} />
+                <RankBox title="Hits" rank={rankStats.rankHits} />
+                <RankBox title="Blocked Shots" rank={rankStats.rankBlockedShots} />
+                </>
+              ): (
+                <>
+                <RankBox title="Wins" rank={rankStats.wins} />
+                <RankBox title="GAA" rank={rankStats.goalsAgainstAverage} />
+                <RankBox title="SV%" rank={rankStats.savePercentage} />
+                <RankBox title="Shutouts" rank={rankStats.shutOuts} />
+                <RankBox title="Saves" rank={rankStats.saves} />
+                <RankBox title="Games Played" rank={rankStats.games} />
+
+                </>
+              )}
+
             </div>
           </div>
         </>
         )}
 
-        {!!shootingEvents && (
+        {!!shootingEvents && playerInfo.primaryPosition.code != "G" && (
           <>
           <h4>Shooting Log</h4>
           <ShotVisualizer events={shootingEvents}/>

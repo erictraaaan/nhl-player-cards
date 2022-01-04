@@ -133,7 +133,6 @@ export const getPlayerInfo = (playerID: number): Promise<PlayerInfo> => {
         const apiCall = `${FLASK_SERVER_URL}/players/${playerID}`;
         axios.get(apiCall)
         .then( (json) => {
-            console.log("player info json: " , json);
             if (json.data){
                 var data: PlayerInfo = json.data;
                 return resolve(data);
