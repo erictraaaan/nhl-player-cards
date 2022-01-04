@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './App.scss';
 import PlayerCard from './components/playercard/PlayerCard';
 import SearchBar from './components/searchbar/SearchBar'
 import { BasePlayer } from './utils/types/Types';

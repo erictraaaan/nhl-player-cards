@@ -36,8 +36,22 @@ export interface PlayerInfo {
     birthCountry: string,
     height: string,
     weight: number,
-    primaryNumber: number
+    primaryNumber: number,
+    primaryPosition: Position,
+    currentTeam: CurrentTeam,
+    currentAge: number
+}
 
+export interface Position{
+    abbreviation: string,
+    code: string,
+    name: string,
+    type: string
+}
+
+export interface CurrentTeam {
+    id: number,
+    name: string
 }
 
 export interface Player{

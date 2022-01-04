@@ -1,0 +1,96 @@
+.player-card {
+    margin-top: 2rem;
+    min-height: 50rem;
+    min-width: 50rem;
+
+    .card-content{
+        width: inherit;
+        height: inherit;
+
+        .header {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+
+            .name{
+                margin-bottom: 1rem;
+            }
+
+            .logo{
+                height:5rem;
+            }
+
+            .position{
+                margin-top: 0.5rem;
+            }
+        }
+
+        .info {
+            // position: absolute;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+            .portrait{
+                margin: 1rem;
+                height: 12rem;
+                width: 12rem;
+            }
+
+            .basic-info{
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                align-items: flex-start;
+                justify-content: center;
+                margin-left: 1rem;
+                margin-right: 1rem;
+
+                p{
+                    margin-top: 0.5rem;
+                    margin-bottom: 0.5rem;
+                }
+            }
+    
+        }
+
+        .rank{
+            &-stats{
+                width: 5rem;
+                height: 5rem;
+
+                .stats{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: flex-end;
+                }
+            }
+
+            &-wrapper{
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            &-box{
+                height: 5rem;
+                width: 5rem;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 5rem;
+                background: aquamarine;
+            }
+        }
+
+        // .rank-stats{
+        //     .rank-wrapper{
+        //         width: 5rem;
+        //         height: 5rem;
+
+        //         .rank-box{
+
+        //         }
+        //     }
+        // }
+
+    }
+
+}
