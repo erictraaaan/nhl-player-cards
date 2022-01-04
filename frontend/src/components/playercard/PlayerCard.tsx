@@ -160,8 +160,15 @@ const PlayerCard = (props: IPlayerCardProps) => {
         {!!shootingEvents && playerInfo.primaryPosition.code != "G" && (
           <>
           <h4>Shooting Log</h4>
-          <ShotVisualizer events={shootingEvents}/>
-          <p>Distribution of shots taken by this player over the past 20 games.</p>
+          <div className='shot-log-wrapper'>
+
+            <ShotVisualizer events={shootingEvents}/>
+            <div className='info-text'>
+              <p>Distribution of shots taken by this player over the past 20 games.</p>
+              <p><b>Large circles</b> represent shooting distribution over the set of games.</p>
+              <p><b>Small circles</b> indicate goals scored during this time period.</p>
+            </div>
+          </div>
           </>
         )}
       </CardContent>

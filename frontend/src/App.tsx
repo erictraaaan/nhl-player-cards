@@ -23,6 +23,7 @@ function App() {
       {!!selectedBasePlayer && (
         <PlayerCard player={selectedBasePlayer}/>
       )}
+      <p>Created by <a href="https://github.com/erictraaaan" target="_blank">Eric Tran</a></p>
     </div>
   );
 }
