@@ -51,6 +51,12 @@ The open-ended nature of this project leaves a lot of potential for further impr
 	* Inspired by [DailyFaceoff](https://www.dailyfaceoff.com/teams/boston-bruins/line-combinations/), it would be great if the player card could display the player's position within their team's depth chart.  This could help both visualize the player's impact on the team, as well as potentially answer whether a player is performing poorly, or perhaps just isn't being given enough opportunities to succeed.
 * **Improve backend "caching" implementation**
 	* In order to optimize the performance of the application, a static list of all players is kept in the backend in a ```.csv``` file.  This file is updated daily in order to ensure the most up to date NHL rosters are captured within the application.  With more time, my next step would be to implement this data storage in a more efficient manner, such as through a database such a MongoDB or SQLite.
+* **Deploy App on Cloud Service (AWS)**
+	* In order to allow users to use this application without having to install anything locally, it makes sense to deploy the app on a cloud service such as AWS. This can be done through leveraging technologies such as API Gateway, Lambda, and DynamoDB to handle the python backend and eventual database, and AWS Amplify or S3 to host the front-end.
+* **Fix Edge-Cases**
+	* There are currently certain edge cases that do not display data as intended on the application.  For example:
+		* Selecting *Carey Price* from the player list results in a broken card, as he does not have any data available (having not played a game yet this season)
+		* Selecting *Mikey Anderson* results in a card that does not display cap hit data.  This is because this player, while known as *'Mikey Anderson'* on the NHL database, is actually known as *'Michael Anderson'* on CapFriendly.  This ends up breaking the CapFriendly scraper.
 * **Limitations on scraping the CapFriendly website**
 	* As mentioned above, scraping the CapFriendly website is against the site's terms of service.  Additionally, since CapFriendly does not use player ID values in their URLs for player specific pages, it is difficult to accurately acquire information through scraping.  With more time, I would certainly explore better approaches to acquiring player salary information.
 
