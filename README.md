@@ -1,9 +1,7 @@
 
 # Bruins Developer Assignment - Eric Tran
 This application displays Player Cards for NHL players.   Use it to quickly view stats and evaluate player performance at a glance.
-
 ![demo](https://raw.githubusercontent.com/erictraaaan/developer_hw/main/img/demo.gif)
-
 ## Setup Steps
 *Note: In order to ensure compatibility, I would greatly appreciate if you create a python virtual environment to run the backend of this application.  Please follow the steps below to set this up.  Thank you!*
 1. Start by cloning the repository with ```git clone https://github.com/erictraaaan/developer_hw.git```
@@ -15,7 +13,7 @@ This application displays Player Cards for NHL players.   Use it to quickly view
 7. Start the Flask server with ```FLASK_DEBUG=1 flask run```
 8. Ensure that the Flask server is running on ```127.0.0.1:5000```. 
 	* If your Flask server isn't on this port, please change the value of ```FLASK_SERVER_URL``` on line 6 of ```frontend/src/utils/APIUtils.ts``` to reflect your Flask server port.
-9. Next, we will set up the frontend.  Navigate to the ```frontend``` folder
+9. Next, we will set up the frontend.  In a separate terminal, navigate to the ```frontend``` folder
 10. Run ```npm install``` to install all the necessary packages for the React app.
 11. Run ```npm start``` to start the application on ```http://localhost:3000/```
 12. You're done!
@@ -31,24 +29,24 @@ A sample player card is shown below.  Each card contains three sections:
 Each section is described in more detail below.
 
 ![screenshot](https://raw.githubusercontent.com/erictraaaan/developer_hw/main/img/screenshot.png)
-
 ### Basic Information
 This section displays basic information such as:
 * Player name, team, position, etc.
 * Player cap hit value
-	* *Note: This value is obtained be scraping the CapFriendly website.  However, CapFriendly prohibits data scraping from their site in their terms of service.  As such, this application should  be used for **demonstration purposes only**.  In order to deploy this feature in a production setting, other (paid) APIs can be used to acquire this data such as those available from [Spotrac](https://www.spotrac.com/developer/api/) or [DailyFaceoff](https://www.dailyfaceoff.com/nhl-hockey-apis/).*
+	* *Note: This value is obtained by scraping the CapFriendly website.  However, CapFriendly prohibits data scraping from their site in their terms of service.  As such, this application should  be used for **demonstration purposes only**.  In order to deploy this feature in a production setting, other (paid) APIs can be used to acquire this data such as those available from [Spotrac](https://www.spotrac.com/developer/api/) or [DailyFaceoff](https://www.dailyfaceoff.com/nhl-hockey-apis/).*
 * Simple performance stats such as goals, assists, points, average time-on-ice (skaters) and wins, save percentage, goals against average (goalies) for the current season.
 ### League Performance Rankings
-When determining player performance, one of the most important aspects to evaluate is their performance compared to their peers. This section highlights how a player performs in various metrics such as goals, assists, shots, etc. in relation to other players in the NHL.  For each metric, the box is colour coded to quickly distinguish key high-performing elements of the player's game.  For goalie player cards, metrics such as Wins, GAA, SV%, etc. are used.
+When determining player performance, one of the most important aspects to evaluate is their play compared to their peers. This section highlights how a player performs in various metrics such as goals, assists, shots, etc. in relation to other players in the NHL.  For each metric, the box is colour coded to quickly distinguish key high-performing elements of the player's game.  For goalie player cards, metrics such as Wins, GAA, SV%, etc. are used.
 ### Shooting Log
 This section shows the player's shooting locations over their past 20 games.  A heat map is created to highlight key areas where the player takes the most shots.  Additionally, shots that resulted in a goal over the player's previous 20 games are also displayed.
 
+
 ## Next Steps and Areas for Improvement
-The open-ended nature of this project leaves a lot of potential for further improvements.  Had we be given more time, there are multiple improvements that I would have loved to make, such as:
+The open-ended nature of this project leaves a lot of potential for further improvements.  Had we be given more time, there are multiple improvements that I would like to make, such as:
 * **Advanced stats and breakdowns**
-	* Given the detail of the NHL API, it is possible to calculate many advanced statistics relating to player performance such as Corsi, Fenwick, and PDO.  Additionally, assigning value to shots based on shot location (using methods such as [War-On-Ice's 'scoring chances'](http://blog.war-on-ice.com/new-defining-scoring-chances/index.html)) and weighing that in when evaluating shooting can help determine true scoring talent.
+	* Given the detail of the NHL API, it is possible to calculate many advanced statistics such as Corsi, Fenwick, and PDO.  Additionally, assigning value to shots based on shot location (using methods such as [War-On-Ice's 'scoring chances'](http://blog.war-on-ice.com/new-defining-scoring-chances/index.html)) and weighing that in when evaluating shooting can help determine true scoring talent.
 * **More defensive statistics**
-	* Most of the stats and data presented in the player card tends to favour offensive players.  I would love to include metrics such as zone exits, breakout passes, and defensive zone takeaways to the card to help better evaluate all types of players.
+	* Most of the stats and data presented in the player card tends to favour offensive players.  As a next step, I would like to include metrics such as zone exits, breakout passes, and defensive zone takeaways to help better evaluate all types of players.
 * **Team depth charts**
 	* Inspired by [DailyFaceoff](https://www.dailyfaceoff.com/teams/boston-bruins/line-combinations/), it would be great if the player card could display the player's position within their team's depth chart.  This could help both visualize the player's impact on the team, as well as potentially answer whether a player is performing poorly, or perhaps just isn't being given enough opportunities to succeed.
 * **Improve backend "caching" implementation**
