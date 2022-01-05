@@ -7,7 +7,7 @@ This application displays Player Cards for NHL players.   Use it to quickly view
 1. Start by cloning the repository with ```git clone https://github.com/erictraaaan/developer_hw.git```
 2. Navigate to the backend folder: ```cd backend``` 
 3. Create the Python virtual environment with ```python3 -m venv .venv```
-4. Start the virtual environment using ```source .venv/bin/activate.bat``` (MacOS) or ```.venv\Scripts\activate``` on Windows.
+4. Start the virtual environment using ```source .venv/bin/activate``` (MacOS) or ```.venv\Scripts\activate.bat``` on Windows.
 5. Ensure that you are running in the virtual environment.  Your terminal command line should be prefaced with something like this: ``` (.venv) erictran@Erics-MacBook-Pro backend %```
 6. Install the necessary python packages with ```pip install -r requirements.txt```
 7. Start the Flask server with ```flask run```
