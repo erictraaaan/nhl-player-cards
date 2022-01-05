@@ -42,7 +42,7 @@ This section shows the player's shooting locations over their past 20 games.  A 
 
 
 ## Next Steps and Areas for Improvement
-The open-ended nature of this project leaves a lot of potential for further improvements.  Had we be given more time, there are multiple improvements that I would like to make, such as:
+The open-ended nature of this project leaves a lot of potential for further improvements.  Had we have been given more time, there are multiple improvements that I would like to make, such as:
 * **Advanced stats and breakdowns**
 	* Given the detail of the NHL API, it is possible to calculate many advanced statistics such as Corsi, Fenwick, and PDO.  Additionally, assigning value to shots based on shot location (using methods such as [War-On-Ice's 'scoring chances'](http://blog.war-on-ice.com/new-defining-scoring-chances/index.html)) and weighing that in when evaluating shooting can help determine true scoring talent.
 * **More defensive statistics**
