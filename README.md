@@ -10,7 +10,7 @@ This application displays Player Cards for NHL players.   Use it to quickly view
 4. Start the virtual environment using ```source .venv/bin/activate.bat``` (MacOS) or ```.venv\Scripts\activate``` on Windows.
 5. Ensure that you are running in the virtual environment.  Your terminal command line should be prefaced with something like this: ``` (.venv) erictran@Erics-MacBook-Pro backend %```
 6. Install the necessary python packages with ```pip install -r requirements.txt```
-7. Start the Flask server with ```FLASK_DEBUG=1 flask run```
+7. Start the Flask server with ```flask run```
 8. Ensure that the Flask server is running on ```127.0.0.1:5000```. 
 	* If your Flask server isn't on this port, please change the value of ```FLASK_SERVER_URL``` on line 6 of ```frontend/src/utils/APIUtils.ts``` to reflect your Flask server port.
 9. Next, we will set up the frontend.  In a separate terminal, navigate to the ```frontend``` folder
