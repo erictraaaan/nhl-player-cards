@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { IShotVisualizerProps } from './types/ShotVisualizer';
-import './ShotVisualizer.scss';
+// import './ShotVisualizer.scss';
 
 const ShotVisualizer = (props: IShotVisualizerProps) => {
     const ref = useRef<HTMLDivElement>(null);

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { getPlayers }from '../../utils/APIUtils';
 import { BasePlayer} from '../../utils/types/Types';
 import { ISearchBarProps } from './types/SearchBar';
-import './SearchBar.scss'
+// import './SearchBar.scss'
 
 const SearchBar = (props: ISearchBarProps) => {
   const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/";
@@ -92,7 +92,7 @@ const SearchBar = (props: ISearchBarProps) => {
             {...params}
             label="Choose a player"
             inputProps={{
-              ...params.inputProps, endAdornment : null,
+              ...params.inputProps,
               autoComplete: 'new-password', // disable autocomplete and autofill
             }}
           />

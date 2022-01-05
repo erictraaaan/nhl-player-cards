@@ -4,10 +4,11 @@ import { getPlayerRankStats, getPlayerBasicStats, getPlayerInfo, getShootingLog,
 import { RankStats, BasicStats, PlayerInfo, ShootingEvent} from '../../utils/types/Types';
 import Card from '@mui/material/Card';
 import { CardContent } from '@mui/material';
-import './PlayerCard.scss';
+// import './PlayerCard.scss';
 import ShotVisualizer from '../shotvisualizer/ShotVisualizer';
 import RankBox from '../rankbox/RankBox';
 import BasicStat from '../basicstat/BasicStat';
+import { roundValue } from '../../utils/PlayerUtils';
 
 const PORTRAITS_URL = "https://nhl.bamcontent.com/images/headshots/current/168x168/";
 const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/";
@@ -114,13 +115,13 @@ const PlayerCard = (props: IPlayerCardProps) => {
               <BasicStat title="G" value={basicStats.goals}/>
               <BasicStat title="A" value={basicStats.assists}/>
               <BasicStat title="P" value={basicStats.points}/>
-              <BasicStat title="Hits" value={basicStats.hits}/>
+              <BasicStat title="TOI" value={basicStats.timeOnIcePerGame}/>
               </>
             ) : (
               <>
               <BasicStat title="Wins" value={basicStats.wins}/>
-              <BasicStat title="SV%" value={basicStats.savePercentage}/>
-              <BasicStat title="GAA" value={basicStats.goalAgainstAverage}/>
+              <BasicStat title="SV%" value={roundValue(basicStats.savePercentage)}/>
+              <BasicStat title="GAA" value={roundValue(basicStats.goalAgainstAverage)}/>
               <BasicStat title="SO" value={basicStats.shutouts}/>
               </>
             )}
@@ -151,7 +152,6 @@ const PlayerCard = (props: IPlayerCardProps) => {
                 <>
                 <RankBox title="Wins" rank={rankStats.wins} totalPlayers={props.totalGoalies}/>
                 <RankBox title="GAA" rank={rankStats.goalsAgainstAverage} totalPlayers={props.totalGoalies}/>
-                <RankBox title="SV%" rank={rankStats.savePercentage} totalPlayers={props.totalGoalies}/>
                 <RankBox title="Shutouts" rank={rankStats.shutOuts} totalPlayers={props.totalGoalies}/>
                 <RankBox title="Saves" rank={rankStats.saves} totalPlayers={props.totalGoalies}/>
                 <RankBox title="Games Played" rank={rankStats.games} totalPlayers={props.totalGoalies}/>
@@ -168,24 +168,28 @@ const PlayerCard = (props: IPlayerCardProps) => {
         </div>
         )}
 
-        {!!shootingEvents && playerInfo.primaryPosition.code != "G" ? (
+        {playerInfo.primaryPosition.code != "G" && (
           <>
-          <h4>Shooting Log</h4>
-          <div className='shot-log-wrapper'>
+          {!!shootingEvents ? (
+            <>
+            <h4>Shooting Log</h4>
+            <div className='shot-log-wrapper'>
 
-            <ShotVisualizer events={shootingEvents}/>
-            <div className='info-text'>
-              <p>Distribution of shots taken by this player over the past 20 games.</p>
-              <p><b>Large circles</b> represent shooting distribution over the set of games.</p>
-              <p><b>Small circles</b> indicate goals scored during this time period.</p>
+              <ShotVisualizer events={shootingEvents}/>
+              <div className='info-text'>
+                <p>Distribution of shots taken by this player over the past 20 games.</p>
+                <p><b>Large circles</b> represent shooting distribution over the set of games.</p>
+                <p><b>Small circles</b> indicate goals scored during this time period.</p>
+              </div>
             </div>
-          </div>
+            </>
+          ) : (
+            <div className='loading-wrapper'>
+              <div className='loader'></div>
+              <p>loading shooting data...</p>
+            </div>
+          )}
           </>
-        ) : (
-          <div className='loading-wrapper'>
-            <div className='loader'></div>
-            <p>loading shooting data...</p>
-          </div>
         )}
       </CardContent>
     </Card>

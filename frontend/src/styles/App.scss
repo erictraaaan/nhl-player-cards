@@ -1,0 +1,38 @@
+@mixin breakpoint($class) {
+  @if $class == xsm {
+    @media (min-width: 320px) {
+        @content;
+    }
+  }
+  @if $class == sm {
+    @media (min-width: 576px) {
+      @content;
+    }
+  }
+  @else if $class == md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @else if $class == lg {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  }
+  @else if $class == xl {
+    @media (min-width: 1700px) {
+      @content;
+    }
+  }
+  @else if $class == xxl {
+    @media (min-width: 2374px) {
+      @content;
+    }
+  }
+}
+
+@import "_App";
+@import "_BasicStat";
+@import "_PlayerCard";
+@import "_SearchBar";
+@import "_ShotVisualizer";
