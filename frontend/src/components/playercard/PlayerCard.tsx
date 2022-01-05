@@ -4,7 +4,6 @@ import { getPlayerRankStats, getPlayerBasicStats, getPlayerInfo, getShootingLog,
 import { RankStats, BasicStats, PlayerInfo, ShootingEvent} from '../../utils/types/Types';
 import Card from '@mui/material/Card';
 import { CardContent } from '@mui/material';
-// import './PlayerCard.scss';
 import ShotVisualizer from '../shotvisualizer/ShotVisualizer';
 import RankBox from '../rankbox/RankBox';
 import BasicStat from '../basicstat/BasicStat';

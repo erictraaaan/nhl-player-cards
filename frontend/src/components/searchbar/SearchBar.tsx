@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { getPlayers }from '../../utils/APIUtils';
 import { BasePlayer} from '../../utils/types/Types';
 import { ISearchBarProps } from './types/SearchBar';
-// import './SearchBar.scss'
 
 const SearchBar = (props: ISearchBarProps) => {
   const IMG_SRC = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/";
