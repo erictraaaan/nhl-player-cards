@@ -6,11 +6,17 @@
         
         .stat {
             margin: 0.5rem;
-            width: 5rem;
-            height: 5rem;
+            width: 4rem;
+            height: 4rem;
+            line-height: 2rem;
+            @include breakpoint(lg){
+                width: 5rem;
+                height: 5rem;
+                line-height: 3rem;
+            }
             border-radius: 50%;
             background: wheat;
-            line-height: 3rem;
+
         }
     }
 }

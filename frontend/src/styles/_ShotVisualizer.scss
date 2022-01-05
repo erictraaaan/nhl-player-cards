@@ -1,4 +1,7 @@
 .shot-visualizer-div{
-    width: 25rem;
+    width: 18rem;
+    @include breakpoint(lg){
+        width: 25rem;
+    }
     margin-bottom: -2rem;
 }

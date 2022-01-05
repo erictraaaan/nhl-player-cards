@@ -1,11 +1,15 @@
 .player-card {
     margin-top: 2rem;
-    min-height: 50rem;
-    min-width: 50rem;
+    width: 22rem;
+    @include breakpoint(lg){
+        width: 49rem;
+    }
+    // min-height: 50rem;
+    // min-width: 50rem;
 
     .card-content{
-        width: inherit;
-        height: inherit;
+        // width: inherit;
+        // height: inherit;
 
         .header {
             margin-top: 1rem;
@@ -27,20 +31,34 @@
         .info {
             // position: absolute;
             display: flex;
-            flex-direction: row;
+            align-items: center;
+            flex-direction: column;
+
+            @include breakpoint(lg){
+                flex-direction: row;
+                align-items: initial;
+            }
+
+
             flex-wrap: nowrap;
 
             .portrait{
                 margin: 1rem;
-                height: 12rem;
-                width: 12rem;
+                height: 8rem;
+                width: 8rem;
+
+                @include breakpoint(lg){
+                    height: 12rem;
+                    width: 12rem;
+                }
+
             }
 
             .basic-info{
                 display: flex;
                 flex-direction: column;
                 align-content: center;
-                align-items: flex-start;
+                // align-items: flex-start;
                 justify-content: center;
                 margin-left: 1rem;
                 margin-right: 1rem;
@@ -61,6 +79,7 @@
                     display: flex;
                     flex-direction: row;
                     align-items: flex-end;
+                    flex-wrap: wrap;
                     justify-content: space-evenly;
                 }
             }
