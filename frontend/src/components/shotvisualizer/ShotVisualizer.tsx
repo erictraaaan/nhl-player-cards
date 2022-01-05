@@ -22,19 +22,19 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
         .classed("svg-content-responsive", true);
 
         //draw the centre ice line
-		drawVerticalLine(svg, 0,0,RINK_HALF_HEIGHT,'red');
+        drawVerticalLine(svg, 0,0,RINK_HALF_HEIGHT,'red');
 
         //draw centre ice circle
-		drawCircle(svg,0,42.5,15,'red');
+        drawCircle(svg,0,42.5,15,'red');
 
         //draw the goal
         drawRectangle(svg,86,39.5,4,6,'blue');
 
         //draw goal line
-		drawVerticalLine(svg,90,1,RINK_HALF_HEIGHT-2,'red');
+        drawVerticalLine(svg,90,1,RINK_HALF_HEIGHT-2,'red');
 
 		//draw the blue line
-		drawVerticalLine(svg,30,0,RINK_HALF_HEIGHT,'blue');
+        drawVerticalLine(svg,30,0,RINK_HALF_HEIGHT,'blue');
 
         // draw the faceoff circles
         drawCircle(svg, 68,20.5,15,'red')
@@ -74,8 +74,7 @@ const ShotVisualizer = (props: IShotVisualizerProps) => {
             if (event.event == "SHOT"){
                 var plotX = event.x;
                 var plotY = 42.5 - event.y;
-                addToHeatArray(
-					heatArray,{x: plotX, y: plotY});
+                addToHeatArray(heatArray,{x: plotX, y: plotY});
             }
         })
 

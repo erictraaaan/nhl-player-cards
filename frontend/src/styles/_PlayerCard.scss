@@ -4,12 +4,8 @@
     @include breakpoint(lg){
         width: 49rem;
     }
-    // min-height: 50rem;
-    // min-width: 50rem;
 
     .card-content{
-        // width: inherit;
-        // height: inherit;
 
         .header {
             margin-top: 1rem;
@@ -29,7 +25,6 @@
         }
 
         .info {
-            // position: absolute;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -58,7 +53,6 @@
                 display: flex;
                 flex-direction: column;
                 align-content: center;
-                // align-items: flex-start;
                 justify-content: center;
                 margin-left: 1rem;
                 margin-right: 1rem;
