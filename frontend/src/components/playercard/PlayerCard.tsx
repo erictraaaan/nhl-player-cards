@@ -130,7 +130,6 @@ const PlayerCard = (props: IPlayerCardProps) => {
           </>
           )}
 
-
         </div>
 
         {!!rankStats ? (
