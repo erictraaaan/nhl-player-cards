@@ -28,7 +28,7 @@ A sample player card is shown below.  Each card contains three sections:
 
 Each section is described in more detail below.
 
-![screenshot](https://raw.githubusercontent.com/erictraaaan/developer_hw/main/img/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/erictraaaan/nhl-player-cards/main/img/screenshot.png)
 ### Basic Information
 This section displays basic information such as:
 * Player name, team, position, etc.
