@@ -1,7 +1,7 @@
 
 # NHL Player Cards
 This application displays Player Cards for NHL players.   Use it to quickly view stats and evaluate player performance at a glance.
-![demo](https://raw.githubusercontent.com/erictraaaan/developer_hw/main/img/demo.gif)
+![demo](https://raw.githubusercontent.com/erictraaaan/nhl-player-cards/main/img/demo.gif)
 ## Setup Steps
 *Note: In order to ensure compatibility, I would greatly appreciate if you create a python virtual environment to run the backend of this application.  Please follow the steps below to set this up.  Thank you!*
 1. Start by cloning the repository with ```git clone https://github.com/erictraaaan/nhl-player-cards.git```
