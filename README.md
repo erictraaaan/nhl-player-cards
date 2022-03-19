@@ -1,5 +1,5 @@
 
-# Bruins Developer Assignment - Eric Tran
+# NHL Player Cards
 This application displays Player Cards for NHL players.   Use it to quickly view stats and evaluate player performance at a glance.
 ![demo](https://raw.githubusercontent.com/erictraaaan/developer_hw/main/img/demo.gif)
 ## Setup Steps
