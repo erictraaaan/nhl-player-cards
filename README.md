@@ -4,7 +4,7 @@ This application displays Player Cards for NHL players.   Use it to quickly view
 ![demo](https://raw.githubusercontent.com/erictraaaan/developer_hw/main/img/demo.gif)
 ## Setup Steps
 *Note: In order to ensure compatibility, I would greatly appreciate if you create a python virtual environment to run the backend of this application.  Please follow the steps below to set this up.  Thank you!*
-1. Start by cloning the repository with ```git clone https://github.com/erictraaaan/developer_hw.git```
+1. Start by cloning the repository with ```git clone https://github.com/erictraaaan/nhl-player-cards.git```
 2. Navigate to the backend folder: ```cd backend``` 
 3. Create the Python virtual environment with ```python3 -m venv .venv```
 4. Start the virtual environment using ```source .venv/bin/activate``` (MacOS) or ```.venv\Scripts\activate.bat``` on Windows.
